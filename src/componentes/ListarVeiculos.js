@@ -30,14 +30,12 @@ function ListarVeiculos() {
         }
     };
 
-    // Recarrega a lista sempre que a tela ganha foco (ao voltar do cadastro/edição)
     useFocusEffect(
         useCallback(() => {
             buscarVeiculos();
         }, [])
     );
 
-    // Função de Exclusão do Veículo
     const confirmarExclusao = (id, modelo) => {
         Alert.alert(
             "Excluir Veículo",
@@ -57,7 +55,6 @@ function ListarVeiculos() {
         try {
             await api.delete(`/veiculos/${id}`);
             Alert.alert("Sucesso", "Veículo removido com sucesso!");
-            // Remove o item da lista localmente para não precisar fazer novo fetch
             setVeiculos((prev) => prev.filter((v) => v.id !== id));
         } catch (error) {
             console.log("Erro ao deletar veículo:", error);
@@ -76,7 +73,6 @@ function ListarVeiculos() {
     return (
         <View style={estilo.wrapper}>
             <ScrollView style={estilo.container} showsVerticalScrollIndicator={false}>
-                {/* Cabeçalho de informações */}
                 <View style={estilo.header}>
                     <Text style={estilo.titulo}>Gerenciador de Veículos</Text>
                     <Text style={estilo.subtitulo}>
@@ -84,11 +80,9 @@ function ListarVeiculos() {
                     </Text>
                 </View>
 
-                {/* Feedback de Carregamento */}
                 {carregando && veiculos.length === 0 ? (
                     <ActivityIndicator size="large" color="#2563EB" style={{ marginTop: 40 }} />
                 ) : (
-                    /* Lista de Cards */
                     <View style={estilo.listaVeiculos}>
                         {veiculos.map((item) => (
                             <View key={item.id} style={estilo.card}>
@@ -124,7 +118,6 @@ function ListarVeiculos() {
                                             <Text style={estilo.preco}>{formatarPreco(item.preco)}</Text>
                                         </View>
 
-                                        {/* Ações: Editar e Excluir */}
                                         <View style={estilo.acoesContainer}>
                                             <TouchableOpacity
                                                 style={estilo.botaoEditar}
@@ -148,7 +141,6 @@ function ListarVeiculos() {
                 )}
             </ScrollView>
 
-            {/* Botão Flutuante para Cadastrar (Navega via Tab) */}
             <TouchableOpacity
                 style={estilo.botaoFlutuante}
                 activeOpacity={0.8}

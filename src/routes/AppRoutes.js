@@ -3,16 +3,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text } from 'react-native';
 
-// Componentes
+
 import ListarVeiculos from '../componentes/ListarVeiculos';
 import CadastrarVeiculo from '../componentes/CadastrarVeiculo';
-// Futuro componente de Edição:
-// import EditarVeiculo from '../componentes/EditarVeiculo'; 
+
+import EditarVeiculo from '../componentes/EditarVeiculo'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// 1. Navegação de Abas (Bottom Tabs)
 function TabRoutes() {
   return (
     <Tab.Navigator
@@ -23,9 +22,9 @@ function TabRoutes() {
         tabBarStyle: {
           backgroundColor: '#FFFFFF',
           borderTopColor: '#E5E7EB',
-          height: 60,
-          paddingBottom: 8,
-          paddingTop: 8,
+          height: 90,
+          paddingBottom: 10,
+          paddingTop: 10,
         },
       }}
     >
@@ -49,18 +48,13 @@ function TabRoutes() {
   );
 }
 
-// 2. Stack Navigation Principal (Abas + Telas de Ação)
 export default function AppRoutes() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {/* As Abas Principais ficam na base da pilha */}
-      <Stack.Screen name="MainTabs" component={TabRoutes} />
       
-      {/* 
-        Telas Nativas da Stack (Empilhadas por cima das abas):
-        
-        <Stack.Screen name="EditarVeiculo" component={EditarVeiculo} /> 
-      */}
+      <Stack.Screen name="MainTabs" component={TabRoutes} />
+      <Stack.Screen name="EditarVeiculo" component={EditarVeiculo} />
+      
     </Stack.Navigator>
   );
 }

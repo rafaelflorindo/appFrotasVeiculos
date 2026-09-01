@@ -9,10 +9,16 @@ import {
     Alert,
     ActivityIndicator
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";//ATUALIZEI
+
 import api from "../service/api";
 import ListarVeiculos from "./ListarVeiculos";
 
-function CadastrarVeiculo({ onVoltar }) {
+function EditarVeiculo({ onVoltar, route }) {
+    const navigation = useNavigation(); //ATUALIZEI
+    
+    const id = route.params.id;//ATUALIZEI
+
     const [modelo, setModelo] = useState("");
     const [placa, setPlaca] = useState("");
     const [ano, setAno] = useState("");
@@ -21,6 +27,10 @@ function CadastrarVeiculo({ onVoltar }) {
     const [linkImagem, setLinkImagem] = useState("");
     const [carregando, setCarregando] = useState(false);
 
+    /*
+    - Construir a função que busca os dados do id e preencher os campos
+    - Atualizar a função abaixo de salvar para editar.
+    */
     const salvarVeiculo = async () => {
         // Validação simples dos campos obrigatórios
         if (!modelo.trim() || !placa.trim() || !ano.trim() || !preco.trim()) {
@@ -247,4 +257,4 @@ const estilo = StyleSheet.create({
     },
 });
 
-export default CadastrarVeiculo;
+export default EditarVeiculo;
