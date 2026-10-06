@@ -67,12 +67,14 @@ function EditarVeiculo({ onVoltar, route }) {
             setCarregando(false);
         }
     };
-
+    const voltar = () => {
+        navigation.goBack();
+    };
     return (
         <ScrollView style={estilo.container} showsVerticalScrollIndicator={false}>
             {/* Cabeçalho da Tela */}
             <View style={estilo.header}>
-                <TouchableOpacity onPress={onVoltar} style={estilo.botaoVoltar}>
+            <TouchableOpacity onPress={voltar} style={estilo.botaoVoltar}>
                     <Text style={estilo.textoVoltar}>← Voltar</Text>
                 </TouchableOpacity>
                 <Text style={estilo.titulo}>Novo Veículo</Text>
